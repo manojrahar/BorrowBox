@@ -7,7 +7,7 @@ const Requests = () => {
 
   const fetchRequests = async () => {
     const res = await fetch(
-      `http://localhost:5000/api/requests/owner/${user._id}`
+      `${import.meta.env.VITE_API_URL}/api/requests/owner/${user._id}`
     );
     const data = await res.json();
     setRequests(data);

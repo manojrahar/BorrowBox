@@ -11,7 +11,7 @@ const Dashboard = () => {
   const fetchDashboard = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/items/dashboard/${user._id}`
+        `${import.meta.env.VITE_API_URL}/api/items/dashboard/${user._id}`
       );
       const result = await res.json();
       setData(result);

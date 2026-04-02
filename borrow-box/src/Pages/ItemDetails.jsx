@@ -9,7 +9,7 @@ const ItemDetails = () => {
 
   const fetchItem = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/items/${id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/items/${id}`);
       const data = await res.json();
       setItem(data);
     } catch (error) {

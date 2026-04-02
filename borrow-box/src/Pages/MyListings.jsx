@@ -9,7 +9,7 @@ const MyListings = () => {
   const fetchMyItems = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/items/user/${user._id}`
+        `${import.meta.env.VITE_API_URL}/api/items/user/${user._id}`
       );
       const data = await res.json();
       setItems(data);
@@ -20,7 +20,7 @@ const MyListings = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/items/${id}`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/items/${id}`, {
         method: "DELETE",
       });
 

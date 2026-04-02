@@ -13,22 +13,31 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-blue-500 to-blue-400 text-white px-8 py-4 sticky top-0 z-50 shadow-md">
-      <div className="flex justify-between items-center">
+    <nav className="bg-gradient-to-r from-blue-500 to-blue-400 text-white px-4 sm:px-8 py-3 sticky top-0 z-50 shadow-md">
+      <div className="flex flex-wrap justify-between items-center gap-3">
         
         {/* LEFT - LOGO */}
-        <Link to="/" className="text-xl font-bold tracking-wide">
+        <Link
+          to="/"
+          className="text-lg sm:text-xl font-bold tracking-wide"
+        >
           BorrowBox
         </Link>
 
         {/* RIGHT */}
-        <div className="flex items-center gap-6 relative">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-6 relative">
           
-          <Link to="/" className="hover:text-gray-300 transition">
+          <Link
+            to="/"
+            className="text-sm sm:text-base hover:text-gray-300 transition"
+          >
             Home
           </Link>
 
-          <Link to="/explore" className="hover:text-gray-300 transition">
+          <Link
+            to="/explore"
+            className="text-sm sm:text-base hover:text-gray-300 transition"
+          >
             Explore
           </Link>
 
@@ -37,7 +46,7 @@ const Navbar = () => {
               {/* ADD ITEM BUTTON */}
               <Link
                 to="/add-item"
-                className="bg-white text-gray-900 px-4 py-1 rounded-lg text-sm font-medium hover:bg-gray-200 transition"
+                className="bg-white text-gray-900 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:bg-gray-200 transition"
               >
                 + Add Item
               </Link>
@@ -46,14 +55,13 @@ const Navbar = () => {
               <div className="relative">
                 <button
                   onClick={() => setOpen(!open)}
-                  className="bg-gray-800 px-4 py-1 rounded-lg text-sm hover:bg-gray-700 transition"
+                  className="w-10 h-10 rounded-full bg-gray-900 text-white flex items-center justify-center font-semibold text-sm hover:bg-gray-700 transition"
                 >
-                  Profile ▾
+                  {user?.name?.charAt(0).toUpperCase()}
                 </button>
 
                 {open && (
-                  <div className="absolute right-0 mt-3 w-44 bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden">
-                    
+                  <div className="absolute right-0 mt-3 w-32 bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden">
                     <Link
                       to="/profile"
                       className="block px-4 py-2 hover:bg-gray-100"
@@ -74,7 +82,7 @@ const Navbar = () => {
                     >
                       My Listings
                     </Link>
-                    
+
                     <Link
                       to="/requests"
                       className="block px-4 py-2 hover:bg-gray-100"
@@ -88,7 +96,6 @@ const Navbar = () => {
                     >
                       Logout
                     </button>
-
                   </div>
                 )}
               </div>
@@ -98,7 +105,7 @@ const Navbar = () => {
           {!user && (
             <Link
               to="/login"
-              className="bg-white text-gray-900 px-4 py-1 rounded-lg text-sm"
+              className="bg-white text-gray-900 px-3 py-2 rounded-lg text-xs sm:text-sm"
             >
               Login
             </Link>

@@ -9,7 +9,7 @@ const Explore = () => {
   
   const fetchItems = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/items`);
       const data = await res.json();
       setItems(data);
     } catch (error) {

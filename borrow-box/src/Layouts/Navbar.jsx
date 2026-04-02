@@ -1,0 +1,112 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
+import { useState } from "react";
+
+const Navbar = () => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
+  return (
+    <nav className="bg-gradient-to-r from-blue-500 to-blue-400 text-white px-8 py-4 sticky top-0 z-50 shadow-md">
+      <div className="flex justify-between items-center">
+        
+        {/* LEFT - LOGO */}
+        <Link to="/" className="text-xl font-bold tracking-wide">
+          BorrowBox
+        </Link>
+
+        {/* RIGHT */}
+        <div className="flex items-center gap-6 relative">
+          
+          <Link to="/" className="hover:text-gray-300 transition">
+            Home
+          </Link>
+
+          <Link to="/explore" className="hover:text-gray-300 transition">
+            Explore
+          </Link>
+
+          {user && (
+            <>
+              {/* ADD ITEM BUTTON */}
+              <Link
+                to="/add-item"
+                className="bg-white text-gray-900 px-4 py-1 rounded-lg text-sm font-medium hover:bg-gray-200 transition"
+              >
+                + Add Item
+              </Link>
+
+              {/* PROFILE DROPDOWN */}
+              <div className="relative">
+                <button
+                  onClick={() => setOpen(!open)}
+                  className="bg-gray-800 px-4 py-1 rounded-lg text-sm hover:bg-gray-700 transition"
+                >
+                  Profile ▾
+                </button>
+
+                {open && (
+                  <div className="absolute right-0 mt-3 w-44 bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden">
+                    
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Profile
+                    </Link>
+
+                    <Link
+                      to="/dashboard"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Dashboard
+                    </Link>
+
+                    <Link
+                      to="/my-listings"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      My Listings
+                    </Link>
+                    
+                    <Link
+                      to="/requests"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Requests
+                    </Link>
+
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 hover:bg-red-50 text-red-500"
+                    >
+                      Logout
+                    </button>
+
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+
+          {!user && (
+            <Link
+              to="/login"
+              className="bg-white text-gray-900 px-4 py-1 rounded-lg text-sm"
+            >
+              Login
+            </Link>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

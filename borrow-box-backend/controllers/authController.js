@@ -6,10 +6,21 @@ exports.registerUser = async (req, res) => {
   try {
     const { name, email, password, phone } = req.body;
 
+    // ADD THIS CODE HERE
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+    if (!gmailRegex.test(email)) {
+      return res.status(400).json({
+        message: "Please enter a valid Gmail address",
+      });
+    }
+
     // check if user exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({ 
+        message: "User already exists" 
+      });
     }
 
     // hash password
@@ -28,7 +39,9 @@ exports.registerUser = async (req, res) => {
       user,
     });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ 
+      message: "Server error" 
+    });
   }
 };
 
